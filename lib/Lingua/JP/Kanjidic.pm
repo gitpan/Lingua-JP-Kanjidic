@@ -5,7 +5,7 @@ use warnings;
 use Encode;
 use Encode::JP;
 use Tie::File;
-our $VERSION = '1.0';
+our $VERSION = '1.1';
 
 my %joyo;
 
@@ -99,7 +99,7 @@ sub lookup {
     for ($self->{last_sought}..$#{$self->{file}}) {
         my $obj = $self->return_line($_);
         $self->{last_sought} = $_;
-        return $obj if $obj->kanji eq $kanji;
+        return $obj if $obj and $obj->kanji eq $kanji
     }
     return;
 }
